@@ -1,5 +1,5 @@
-import { ENV_VAR } from '../../utils/environment';
-import { UrlMap } from '../../enums/urlMap.enum';
+import { ENV_VAR } from 'utils/environment';
+import { UrlMap } from 'enums/urlMap.enum';
 import Loader from './loader';
 
 class AppLoader extends Loader {

@@ -1,5 +1,5 @@
-import { getHtmlElement } from '../../../utils/getElements';
-import { IFullArticleResponse } from '../../../models/article.model';
+import { getHtmlElement } from 'utils/getElements';
+import { IFullArticleResponse } from 'models/article.model';
 import './news.css';
 
 const NEWS_ITEM_TEMPLATE_ID = '#newsItemTemp';

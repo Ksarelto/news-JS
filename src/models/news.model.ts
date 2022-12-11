@@ -10,3 +10,5 @@ export interface ISourcesNewsResponse {
     status: string;
     sources: ISourceArticleResponse[];
 }
+
+export interface ICommonNewsResponse extends IAllNewsResponse, ISourcesNewsResponse {}

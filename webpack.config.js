@@ -21,6 +21,11 @@ const baseConfig = {
     },
     resolve: {
         extensions: ['.js', '.ts'],
+        alias: {
+            'models': path.resolve(__dirname, 'src/models'),
+            'utils': path.resolve(__dirname, 'src/utils'),
+            'enums': path.resolve(__dirname, 'src/enums')
+        }
     },
     output: {
         filename: 'index.js',

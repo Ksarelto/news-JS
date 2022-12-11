@@ -1,9 +1,8 @@
-import { ErrorMessage } from '../../utils/messages';
-import { RequestMethod } from '../../enums/request-methods.enum';
-import { IGetNewsCallback } from '../../models/callback.model';
-import { IAllNewsResponse, ISourcesNewsResponse } from '../../models/news.model';
-import { IRequestOptions } from '../../models/options.model';
-import { IRequest } from '../../models/request.model';
+import { ErrorMessage } from 'utils/messages';
+import { RequestMethod } from 'enums/request-methods.enum';
+import { ICommonNewsResponse } from 'models/news.model';
+import { IRequestOptions } from 'models/options.model';
+import { IRequest } from 'models/request.model';
 
 enum HttpStatus {
     UNAUTHORISED = 401,
@@ -17,8 +16,8 @@ class Loader {
     }
 
     public getResp(
-        { endpoint, options = {} }: IRequest,
-        callback: () => void = (): void => {
+        { endpoint = '', options = {} }: Partial<IRequest>,
+        callback: (data: ICommonNewsResponse) => void = (): void => {
             console.error(ErrorMessage.NO_CALLBACK);
         }
     ): void {
@@ -49,7 +48,7 @@ class Loader {
     private load(
         method: string,
         endpoint: string,
-        callback: IGetNewsCallback<IAllNewsResponse | ISourcesNewsResponse>,
+        callback: (data: ICommonNewsResponse) => void,
         options: IRequestOptions = {}
     ): void {
         fetch(this.makeUrl(options, endpoint), { method })

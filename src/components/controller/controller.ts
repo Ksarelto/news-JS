@@ -1,6 +1,6 @@
-import { UrlMap } from '../../enums/urlMap.enum';
-import { IGetNewsCallback } from '../../models/callback.model';
-import { IAllNewsResponse, ISourcesNewsResponse } from '../../models/news.model';
+import { UrlMap } from 'enums/urlMap.enum';
+import { IGetNewsCallback } from 'models/callback.model';
+import { IAllNewsResponse, ISourcesNewsResponse } from 'models/news.model';
 import AppLoader from './appLoader';
 
 const SOURCE_ITEM_CLASS_NAME = 'source__item';

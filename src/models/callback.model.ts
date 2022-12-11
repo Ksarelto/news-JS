@@ -1,1 +1,1 @@
-export type IGetNewsCallback<T> = (data?: T) => void;
+export type IGetNewsCallback<T> = (data: T) => void;
