@@ -1,4 +1,4 @@
-import { IAllNewsResponse, ISourcesNewsResponse } from '../models/news.model';
+import { IAllNewsResponse, ISourcesNewsResponse } from '../../models/news.model';
 import News from './news/news';
 import Sources from './sources/sources';
 

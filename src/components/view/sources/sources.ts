@@ -1,5 +1,5 @@
-import { getHtmlElement } from '../../../utils/shared';
-import { ISourceArticleResponse } from './../../models/article.model';
+import { getHtmlElement } from '../../../utils/getElements';
+import { ISourceArticleResponse } from '../../../models/article.model';
 import './sources.css';
 
 const SOURE_ITEM_TEMPLATE_ID = '#sourceItemTemp';

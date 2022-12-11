@@ -1,11 +1,11 @@
-import { UrlMap } from '../enums/urlMap.enum';
-import { IGetNewsCallback } from '../models/callback.model';
-import { IAllNewsResponse, ISourcesNewsResponse } from '../models/news.model';
+import { UrlMap } from '../../enums/urlMap.enum';
+import { IGetNewsCallback } from '../../models/callback.model';
+import { IAllNewsResponse, ISourcesNewsResponse } from '../../models/news.model';
 import AppLoader from './appLoader';
 
 const SOURCE_ITEM_CLASS_NAME = 'source__item';
 
-enum Attributes {
+enum SourceAttribute {
     DATASOURCE = 'data-source',
     DATASOURCE_ID = 'data-source-id',
 }
@@ -26,10 +26,10 @@ class AppController extends AppLoader {
 
         while (target !== newsContainer) {
             if (target.classList.contains(SOURCE_ITEM_CLASS_NAME)) {
-                const sourceId = target.getAttribute(Attributes.DATASOURCE_ID) || '';
+                const sourceId = target.getAttribute(SourceAttribute.DATASOURCE_ID) || '';
 
-                if (newsContainer.getAttribute(Attributes.DATASOURCE) !== sourceId) {
-                    newsContainer.setAttribute(Attributes.DATASOURCE, sourceId);
+                if (newsContainer.getAttribute(SourceAttribute.DATASOURCE) !== sourceId) {
+                    newsContainer.setAttribute(SourceAttribute.DATASOURCE, sourceId);
                     super.getResp(
                         {
                             endpoint: UrlMap.EVERY,

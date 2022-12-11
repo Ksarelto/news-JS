@@ -1,7 +1,14 @@
-import { IGetNewsCallback } from '../models/callback.model';
-import { IAllNewsResponse, ISourcesNewsResponse } from '../models/news.model';
-import { IRequestOptions } from '../models/options.model';
-import { IRequest } from '../models/request.model';
+import { ErrorMessage } from '../../utils/messages';
+import { RequestMethod } from '../../enums/request-methods.enum';
+import { IGetNewsCallback } from '../../models/callback.model';
+import { IAllNewsResponse, ISourcesNewsResponse } from '../../models/news.model';
+import { IRequestOptions } from '../../models/options.model';
+import { IRequest } from '../../models/request.model';
+
+enum HttpStatus {
+    UNAUTHORISED = 401,
+    NOTFOUND = 404,
+}
 
 class Loader {
     constructor(private baseLink: string, private options: IRequestOptions) {
@@ -11,17 +18,17 @@ class Loader {
 
     public getResp(
         { endpoint, options = {} }: IRequest,
-        callback: (data: any) => void = (): void => {
-            console.error('No callback for GET response');
+        callback: () => void = (): void => {
+            console.error(ErrorMessage.NO_CALLBACK);
         }
     ): void {
-        this.load('GET', endpoint, callback, options);
+        this.load(RequestMethod.GET, endpoint, callback, options);
     }
 
     private errorHandler(res: Response): Response {
         if (!res.ok) {
-            if (res.status === 401 || res.status === 404)
-                console.log(`Sorry, but there is ${res.status} error: ${res.statusText}`);
+            if (res.status === HttpStatus.UNAUTHORISED || res.status === HttpStatus.NOTFOUND)
+                console.log(ErrorMessage.SERVER_ERROR(res.status, res.statusText));
             throw Error(res.statusText);
         }
 

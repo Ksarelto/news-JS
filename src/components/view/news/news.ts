@@ -1,5 +1,5 @@
-import { getHtmlElement } from '../../../utils/shared';
-import { IFullArticleResponse } from '../../models/article.model';
+import { getHtmlElement } from '../../../utils/getElements';
+import { IFullArticleResponse } from '../../../models/article.model';
 import './news.css';
 
 const NEWS_ITEM_TEMPLATE_ID = '#newsItemTemp';
@@ -28,9 +28,8 @@ class News {
         news.forEach((item, idx) => {
             const newsClone = newsItemTemp.content.cloneNode(true) as HTMLDivElement;
 
-            if (idx % 2) {
+            if (idx % 2)
                 newsClone.querySelector(ArticleValuesClassNames.ITEM)?.classList.add(NEWS_ITEM_ALTERNATIVE_CLASS_NAME);
-            }
 
             getHtmlElement(newsClone, ArticleValuesClassNames.PHOTO).style.backgroundImage = `url(${
                 item.urlToImage || PHOTO_PLACEHOLDER_URL

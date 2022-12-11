@@ -1,10 +1,11 @@
-import { UrlMap } from '../enums/urlMap.enum';
+import { ENV_VAR } from '../../utils/environment';
+import { UrlMap } from '../../enums/urlMap.enum';
 import Loader from './loader';
 
 class AppLoader extends Loader {
     constructor() {
         super(UrlMap.BASE_URL, {
-            apiKey: 'e60b5635d25644f9bd31ee59009be1ac',
+            apiKey: ENV_VAR.API_KEY || '',
         });
     }
 }
