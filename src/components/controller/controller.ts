@@ -1,38 +1,38 @@
-import { UrlMap } from 'enums/urlMap.enum';
-import { IGetNewsCallback } from 'models/callback.model';
+import { GetNewsCallback } from 'models/callback.model';
 import { IAllNewsResponse, ISourcesNewsResponse } from 'models/news.model';
+import { newsApiMap } from 'utils/apiMap';
 import AppLoader from './appLoader';
 
 const SOURCE_ITEM_CLASS_NAME = 'source__item';
 
 enum SourceAttribute {
-    DATASOURCE = 'data-source',
-    DATASOURCE_ID = 'data-source-id',
+    DATA_SOURCE = 'data-source',
+    DATA_SOURCE_ID = 'data-source-id',
 }
 
 class AppController extends AppLoader {
-    public getSources(callback: IGetNewsCallback<ISourcesNewsResponse>): void {
+    public getSources(callback: GetNewsCallback<ISourcesNewsResponse>): void {
         super.getResp(
             {
-                endpoint: UrlMap.SOURCES,
+                endpoint: newsApiMap.endpoints.sources,
             },
             callback
         );
     }
 
-    public getNews(e: Event, callback: IGetNewsCallback<IAllNewsResponse>): void {
+    public getNews(e: Event, callback: GetNewsCallback<IAllNewsResponse>): void {
         let target = e.target as HTMLElement;
         const newsContainer = e.currentTarget as HTMLDivElement;
 
         while (target !== newsContainer) {
             if (target.classList.contains(SOURCE_ITEM_CLASS_NAME)) {
-                const sourceId = target.getAttribute(SourceAttribute.DATASOURCE_ID) || '';
+                const sourceId = target.getAttribute(SourceAttribute.DATA_SOURCE_ID) || '';
 
-                if (newsContainer.getAttribute(SourceAttribute.DATASOURCE) !== sourceId) {
-                    newsContainer.setAttribute(SourceAttribute.DATASOURCE, sourceId);
+                if (newsContainer.getAttribute(SourceAttribute.DATA_SOURCE) !== sourceId) {
+                    newsContainer.setAttribute(SourceAttribute.DATA_SOURCE, sourceId);
                     super.getResp(
                         {
-                            endpoint: UrlMap.EVERY,
+                            endpoint: newsApiMap.endpoints.every,
                             options: {
                                 sources: sourceId,
                             },

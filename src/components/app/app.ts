@@ -15,7 +15,7 @@ class App {
     }
 
     public start(): void {
-        const sourceBlock = document?.querySelector(SOURCE_BLOCK_CLASS_NAME);
+        const sourceBlock = document.querySelector(SOURCE_BLOCK_CLASS_NAME);
 
         if (sourceBlock) {
             sourceBlock.addEventListener('click', (e: Event): void =>

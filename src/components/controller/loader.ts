@@ -1,13 +1,9 @@
 import { ErrorMessage } from 'utils/messages';
 import { RequestMethod } from 'enums/request-methods.enum';
-import { ICommonNewsResponse } from 'models/news.model';
 import { IRequestOptions } from 'models/options.model';
 import { IRequest } from 'models/request.model';
-
-enum HttpStatus {
-    UNAUTHORISED = 401,
-    NOTFOUND = 404,
-}
+import { ResponseStatus } from '../../enums/http-status.enum';
+import { CommonNewsCallback } from '../../models/callback.model';
 
 class Loader {
     constructor(private baseLink: string, private options: IRequestOptions) {
@@ -17,7 +13,7 @@ class Loader {
 
     public getResp(
         { endpoint = '', options = {} }: Partial<IRequest>,
-        callback: (data: ICommonNewsResponse) => void = (): void => {
+        callback: CommonNewsCallback = (): void => {
             console.error(ErrorMessage.NO_CALLBACK);
         }
     ): void {
@@ -26,7 +22,7 @@ class Loader {
 
     private errorHandler(res: Response): Response {
         if (!res.ok) {
-            if (res.status === HttpStatus.UNAUTHORISED || res.status === HttpStatus.NOTFOUND)
+            if (res.status === ResponseStatus.UNAUTHORIZED || res.status === ResponseStatus.NOTFOUND)
                 console.log(ErrorMessage.SERVER_ERROR(res.status, res.statusText));
             throw Error(res.statusText);
         }
@@ -45,12 +41,7 @@ class Loader {
         return url.slice(0, -1);
     }
 
-    private load(
-        method: string,
-        endpoint: string,
-        callback: (data: ICommonNewsResponse) => void,
-        options: IRequestOptions = {}
-    ): void {
+    private load(method: string, endpoint: string, callback: CommonNewsCallback, options: IRequestOptions = {}): void {
         fetch(this.makeUrl(options, endpoint), { method })
             .then(this.errorHandler)
             .then((res) => res.json())

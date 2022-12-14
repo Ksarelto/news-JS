@@ -28,12 +28,14 @@ class News {
         news.forEach((item, idx) => {
             const newsClone = newsItemTemp.content.cloneNode(true) as HTMLDivElement;
 
-            if (idx % 2)
+            if (idx % 2) {
                 newsClone.querySelector(ArticleValuesClassNames.ITEM)?.classList.add(NEWS_ITEM_ALTERNATIVE_CLASS_NAME);
+            }
 
             getHtmlElement(newsClone, ArticleValuesClassNames.PHOTO).style.backgroundImage = `url(${
                 item.urlToImage || PHOTO_PLACEHOLDER_URL
             })`;
+
             getHtmlElement(newsClone, ArticleValuesClassNames.AUTHOR).textContent = item.author || item.source.name;
             getHtmlElement(newsClone, ArticleValuesClassNames.DATE).textContent = item.publishedAt
                 .slice(0, 10)

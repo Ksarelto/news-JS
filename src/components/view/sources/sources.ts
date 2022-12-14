@@ -2,8 +2,8 @@ import { getHtmlElement } from 'utils/getElements';
 import { ISourceArticleResponse } from 'models/article.model';
 import './sources.css';
 
-const SOURE_ITEM_TEMPLATE_ID = '#sourceItemTemp';
-const SOURCE_ITEM_ID_ATTR = 'data-source-id';
+const SOURCE_ITEM_TEMPLATE_ID = '#sourceItemTemp';
+const SOURCE_ITEM_DATA_ATTR = 'data-source-id';
 
 enum SourceValuesClassNames {
     SOURCES = '.sources',
@@ -14,13 +14,13 @@ enum SourceValuesClassNames {
 class Sources {
     draw(data: ISourceArticleResponse[]): void {
         const fragment = document.createDocumentFragment();
-        const sourceItemTemp = document.querySelector(SOURE_ITEM_TEMPLATE_ID) as HTMLTemplateElement;
+        const sourceItemTemp = document.querySelector(SOURCE_ITEM_TEMPLATE_ID) as HTMLTemplateElement;
 
-        data.forEach((item) => {
+        data.forEach(({ name, id }) => {
             const sourceClone = sourceItemTemp.content.cloneNode(true) as HTMLDivElement;
 
-            getHtmlElement(sourceClone, SourceValuesClassNames.NAME).textContent = item.name;
-            getHtmlElement(sourceClone, SourceValuesClassNames.ITEM).setAttribute(SOURCE_ITEM_ID_ATTR, item.id);
+            getHtmlElement(sourceClone, SourceValuesClassNames.NAME).textContent = name;
+            getHtmlElement(sourceClone, SourceValuesClassNames.ITEM).setAttribute(SOURCE_ITEM_DATA_ATTR, id);
 
             fragment.append(sourceClone);
         });

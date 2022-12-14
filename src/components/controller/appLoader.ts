@@ -1,10 +1,10 @@
 import { ENV_VAR } from 'utils/environment';
-import { UrlMap } from 'enums/urlMap.enum';
 import Loader from './loader';
+import { newsApiMap } from '../../utils/apiMap';
 
 class AppLoader extends Loader {
     constructor() {
-        super(UrlMap.BASE_URL, {
+        super(newsApiMap.baseUrl, {
             apiKey: ENV_VAR.API_KEY || '',
         });
     }
